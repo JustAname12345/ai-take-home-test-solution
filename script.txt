@@ -1,0 +1,1 @@
+python run.py experiment=stable_diffusion.yaml

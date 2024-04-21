@@ -1,0 +1,22 @@
+# @package _global_
+
+# to execute this experiment run:
+# python run.py experiment=train_stable_diffusion.yaml
+
+defaults:
+  - override /trainer: sd_trainer.yaml  # Specific trainer config for Stable Diffusion
+  - override /model: stable_diffusion_model.yaml  # Model specifics for Stable Diffusion
+  - override /datamodule: stable_diffusion_datamodule.yaml  # Data handling for high-res images
+  - override /callbacks: sd_callbacks.yaml  # Custom callbacks for Stable Diffusion
+  - override /logger: wandb.yaml  # Wandb for logging
+
+seed: 12345
+
+trainer:
+  gpus: 0  # Assuming you need GPU for training Stable Diffusion
+  max_epochs: 20  # Longer training for learning detailed image features
+
+datamodule:
+  batch_size: 8  # Smaller batch size due to larger, more complex images
+  img_size: 256  # Higher resolution images for Stable Diffusion
+

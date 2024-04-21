@@ -1,0 +1,16 @@
+_target_: pytorch_lightning.Trainer
+
+gpus: 1
+
+weights_summary: null
+
+progress_bar_refresh_rate: 1
+
+resume_from_checkpoint: null
+
+max_epochs: 100
+
+precision: 16
+
+auto_scale_batch_size: "power"
+auto_lr_find: true

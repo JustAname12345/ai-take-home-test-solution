@@ -1,0 +1,7 @@
+_target_: src.models.stable_diffusion_model.StableDiffusionModel
+
+
+learning_rate: 0.0001
+
+
+

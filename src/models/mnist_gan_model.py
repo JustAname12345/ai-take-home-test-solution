@@ -96,12 +96,38 @@ class MNISTGANModel(LightningModule):
 
     def validation_step(self, batch, batch_idx) -> Union[Tensor, Dict[str, Any], None]:
         log_dict, loss = self.step(batch, batch_idx)
+        val_loss = log_dict['d_loss']+log_dict['g_loss']
+        self.log('val_loss', val_loss, on_step=False, on_epoch=True, prog_bar=True)
+        return {'val_loss': val_loss}
+        '''
         self.log_dict({"/".join(("val", k)): v for k, v in log_dict.items()})
         return None
+        '''
 
     def test_step(self, batch, batch_idx) -> Union[Tensor, Dict[str, Any], None]:
         # TODO: if you have time, try implementing a test step
-        raise NotImplementedError
+        imgs, _ = batch  # Assuming labels aren't needed for testing
+        batch_size = imgs.shape[0]
+        valid = torch.ones(batch_size, 1, device=self.device)
+        fake = torch.zeros(batch_size, 1, device=self.device)
+
+        # Generate random noise
+        z = torch.randn(batch_size, 100, device=self.device)
+        # Generate images
+        gen_imgs = self.generator(z)
+
+        # Discriminator's ability to classify real images as real
+        real_loss = self.adversarial_loss(self.discriminator(imgs), valid)
+        # Discriminator's ability to classify fake images as fake
+        fake_loss = self.adversarial_loss(self.discriminator(gen_imgs.detach()), fake)
+        # Overall loss for discriminator
+        d_loss = (real_loss + fake_loss) / 2
+        # Loss for generator is not typically evaluated in test_step
+
+        # Log test losses to some logger or simply return them
+        log_dict = {'test_real_loss': real_loss, 'test_fake_loss': fake_loss, 'test_d_loss': d_loss}
+        self.log_dict(log_dict)
+        return log_dict
 
     def step(self, batch, batch_idx, optimizer_idx=None):
         imgs, _ = batch  # Assume labels aren't needed

@@ -1,8 +1,9 @@
 model_checkpoint:
   _target_: pytorch_lightning.callbacks.ModelCheckpoint
-  monitor: null
+  monitor: 'val_loss'
   dirpath: "ckpts"
-  filename: "{step:09d}"
-  every_n_train_steps: 10000
-  save_top_k: -1
+  filename: "mnist-{epoch:02d}-{val_loss:.2f}"
+  #every_n_train_steps: 10000
+  save_top_k: 1
   save_last: True
+  mode: 'min'

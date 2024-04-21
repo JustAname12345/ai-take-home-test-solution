@@ -75,6 +75,7 @@ class MNISTDataModule(LightningDataModule):
         self.data_train, self.data_val, self.data_test = random_split(
             dataset, self.train_val_test_split
         )
+        #print('ccc')
 
     def train_dataloader(self):
         return DataLoader(

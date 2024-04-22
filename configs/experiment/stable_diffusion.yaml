@@ -14,7 +14,7 @@ seed: 12345
 
 trainer:
   gpus: 0  # Assuming you need GPU for training Stable Diffusion
-  max_epochs: 20  # Longer training for learning detailed image features
+  max_epochs: 1  # Longer training for learning detailed image features
 
 datamodule:
   batch_size: 8  # Smaller batch size due to larger, more complex images

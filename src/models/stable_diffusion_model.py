@@ -42,17 +42,33 @@ class StableDiffusionModel(pl.LightningModule):
 
     def training_step(self, batch, batch_idx):
         images, texts = batch
-        inputs = self.tokenizer(texts, return_tensors="pt", padding=True, truncation=True)
+        inputs = self.tokenizer(texts, return_tensors="pt", padding='max_length', truncation=True,max_length=22)
         input_ids, attention_mask = inputs.input_ids, inputs.attention_mask
         predictions = self(input_ids.to(self.device), attention_mask.to(self.device), images.to(self.device))
         loss = self.loss_fn(predictions, images)
         self.log('train_loss', loss)
         return loss
+    def validation_step(self, batch, batch_idx):
+        images, texts = batch
+        inputs = self.tokenizer(texts, return_tensors="pt", padding='max_length', truncation=True, max_length=22)
+        input_ids, attention_mask = inputs.input_ids, inputs.attention_mask
+        predictions = self(input_ids.to(self.device), attention_mask.to(self.device), images.to(self.device))
+        val_loss = self.loss_fn(predictions, images)
+        self.log('val_loss', val_loss, prog_bar=True)
+        return val_loss
 
+    def test_step(self, batch, batch_idx):
+        images, texts = batch
+        inputs = self.tokenizer(texts, return_tensors="pt", padding='max_length', truncation=True, max_length=22)
+        input_ids, attention_mask = inputs.input_ids, inputs.attention_mask
+        predictions = self(input_ids.to(self.device), attention_mask.to(self.device), images.to(self.device))
+        test_loss = self.loss_fn(predictions, images)
+        self.log('test_loss', test_loss, prog_bar=True)
+        return test_loss
 
     def configure_optimizers(self):
         return torch.optim.Adam(self.parameters(), lr=self.hparams.learning_rate)
-
+'''
 class TextImageDataModule(pl.LightningDataModule):
     def __init__(self, dataset, batch_size):
         super().__init__()
@@ -61,3 +77,4 @@ class TextImageDataModule(pl.LightningDataModule):
 
     def train_dataloader(self):
         return DataLoader(self.dataset, batch_size=self.batch_size,drop_last=True)
+'''

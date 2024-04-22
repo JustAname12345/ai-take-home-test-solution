@@ -1,0 +1,54 @@
+{
+    "os": "Windows-10-10.0.22621-SP0",
+    "python": "3.7.16",
+    "heartbeatAt": "2024-04-21T15:40:39.388245",
+    "startedAt": "2024-04-21T15:40:38.348126",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "experiment=stable_diffusion.yaml"
+    ],
+    "state": "running",
+    "program": "run.py",
+    "codePathLocal": null,
+    "git": {
+        "remote": "https://github.com/JustAname12345/ai-take-home-test-solution.git",
+        "commit": "5611cf41ddc99d6f0e907f327941ea79b228f3c2"
+    },
+    "email": "paul@vision-matrix.com",
+    "root": "D:/work/ai-take-home-test-solution",
+    "host": "LAPTOP-JTC5480G",
+    "username": "m",
+    "executable": "D:\\anaconda3\\envs\\YoloV8\\python.exe",
+    "cpu_count": 4,
+    "cpu_count_logical": 8,
+    "cpu_freq": {
+        "current": 3187.0,
+        "min": 0.0,
+        "max": 3187.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3187.0,
+            "min": 0.0,
+            "max": 3187.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 329.07421493530273,
+            "used": 139.30538940429688
+        }
+    },
+    "gpu": "NVIDIA GeForce MX450",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce MX450",
+            "memory_total": 2147483648
+        }
+    ],
+    "memory": {
+        "total": 15.784477233886719
+    }
+}

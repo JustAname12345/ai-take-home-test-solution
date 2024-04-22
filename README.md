@@ -75,6 +75,9 @@ conda activate pantheon-py38
 # install requirements
 pip install -r requirements.txt
 ```
+To ensure proper logging of training data via wandb, please replace 'xxxx' with your API key in the .env file 
+as follows:
+WANDB_API_KEY="xxxx"
 
 Train model with experiment configuration
 ```yaml
@@ -93,6 +96,8 @@ it will train a GAN that could generate fake MNIST data
 
 You also can override experiment configuration to train a additional stable diffusion model (generate flower
 Figure based on description)
+Due to computational constraints, we've downscaled the Stable Diffusion model—for instance, opting for ResNet18
+ over ViT. Consequently, this serves as a proof of concept rather than a fully-fledged application.
 ```yaml
 python run.py experiment=stable_diffusion.yaml
 ```

@@ -58,7 +58,7 @@ Ensure CUDA, cuDNN, and NCCL (on Linux) are properly installed to support multi-
 **All implementation tasks in the code are marked with** `completed`
 
 
-For example, training the model for around 20 epochs will give you results like this:
+For example, training the model for around 2 epochs will give you results like this:
 
 ![example_train](./images/example_train.png)
 

@@ -97,7 +97,11 @@ it will train a GAN that could generate fake MNIST data
 You also can override experiment configuration to train a additional stable diffusion model (generate flower
 Figure based on description)
 Due to computational constraints, we've downscaled the Stable Diffusion model—for instance, opting for ResNet18
- over ViT. Consequently, this serves as a proof of concept rather than a fully-fledged application.
+over ViT. Consequently, this serves as a proof of concept rather than a fully-fledged application.
+Regarding the variant of Stable Diffusion, I have explained in the README that I did not use the traditional diffusion process. 
+ Instead, I used a transformer for feature fusion and image reconstruction. This choice was due to hardware limitations, which 
+ prevented me from using a traditional DDPM-based framework, so I opted for a transformer as a proof of concept.
+ 
 ```yaml
 python run.py experiment=stable_diffusion.yaml
 ```

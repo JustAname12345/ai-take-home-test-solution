@@ -21,6 +21,7 @@ black           # code formatting
 isort           # import sorting
 flake8          # code analysis
 python-dotenv
+pillow
 
 # --------- others --------- #
 python-dotenv   # loading env variables from .env file

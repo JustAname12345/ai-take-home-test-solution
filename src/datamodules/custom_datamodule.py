@@ -118,9 +118,9 @@ def load_flower_names(index):
 
     return flower_names.get(index, "Unknown")
 
-def generate_description(flower_name):
+def generate_description(flower_name, idx):
     """Generates a simple description for a given flower name."""
-    return f"This is a beautiful image of a {flower_name}, known for its distinct characteristics and vibrant colors."
+    return f"This is a beautiful image of a {flower_name}, known for its distinct characteristics. Image ID: {idx}"
 
 
 class Flowers102Dataset(Dataset):
@@ -141,7 +141,7 @@ class Flowers102Dataset(Dataset):
         image, _ = self.data[idx]  # Original dataset index is not used
         label = self.labels_mat[idx]  # Get the actual label using index
         flower_name = load_flower_names(label)  # Get the flower name using the label index
-        description = generate_description(flower_name)
+        description = generate_description(flower_name,idx)
 
         return image, description
 
